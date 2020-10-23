@@ -22,4 +22,9 @@ export class AdGroupTableComponent implements OnInit {
     this.agService.getRows().subscribe(apiRows => this.rows = apiRows);
   }
 
+  closePopover(popover) {
+    console.log("closing popover");
+    popover.close();
+  }
+
 }

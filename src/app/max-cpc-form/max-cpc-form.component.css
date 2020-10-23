@@ -1,0 +1,13 @@
+.flex-buttonpair {
+    display: flex;
+    justify-content: right;
+    margin-top: 5px;
+}
+
+.flex-buttonpair *:first-child {
+    margin-right: 5px;
+}
+
+.flex-buttonpair *:last-child {
+    margin-right: 0;
+}
