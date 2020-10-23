@@ -7,11 +7,8 @@ import { DataRow } from './data-row';
   providedIn: 'root'
 })
 export class InMemoryDataService implements InMemoryDbService {
-
-  constructor() { }
-
   createDb() {
-    const data = [
+    const rows = [
       {
         id: 1,
         name: 'Ad Group 1',
@@ -21,7 +18,7 @@ export class InMemoryDataService implements InMemoryDbService {
           'Tablets',
         ],
         status: 'Eligible',
-        maxCpc: 100.00
+        maxCpc: 100.00,
       },
       {
         id: 2,
@@ -32,10 +29,13 @@ export class InMemoryDataService implements InMemoryDbService {
           'Tablets',
         ],
         status: 'Paused',
-        maxCpc: 2.30
-      }
+        maxCpc: 2.30,
+      },
     ];
-    return data;
+
+    console.log("in-mem db created.")
+
+    return { rows };
   }
 
   genId(rows: DataRow[]): number {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdGroupService } from '../ad-group.service';
 
 @Component({
   selector: 'app-ad-group-table',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ad-group-table.component.css']
 })
 export class AdGroupTableComponent implements OnInit {
+  rows;
 
-  constructor() { }
+  constructor(
+    private agService: AdGroupService
+  ) { }
 
   ngOnInit(): void {
+    this.getRows();
+    console.log(this.rows);
+  }
+
+  getRows(): void {
+    this.agService.getRows().subscribe(apiRows => this.rows = apiRows);
   }
 
 }

@@ -1,1 +1,36 @@
-<p>ad-group-table works!</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Ad group</th>
+            <th>Status</th>
+            <th class="small-column">Default max. CPC</th>
+            <th>Ad group type</th>
+            <th>Clicks</th>
+            <th>Impr.</th>
+            <th>CTR</th>
+            <th>Avg. CPC</th>
+            <th>Cost</th>
+            <th>Conversions</th>
+            <th>Cost/click</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let row of rows; index as i">
+        <tr class="table-borderless">
+            <td>{{row.name}}</td>
+            <td>{{row.status}}</td>
+            <td class="small-column">
+                <div class="flex-cell">
+                    MYR{{row.maxCpc.toFixed(2)}}
+                    <ng-template #popContent>
+                        <app-max-cpc-form></app-max-cpc-form>
+                    </ng-template>
+                    <span placement="right" [ngbPopover]="popContent" class="oi oi-pencil"></span>
+                </div>
+            </td>
+        </tr>
+        <tr class="table-borderless" *ngFor="let item of row.items">
+            <td>{{item}}</td>
+        </tr>
+    </tbody>
+</table>
+

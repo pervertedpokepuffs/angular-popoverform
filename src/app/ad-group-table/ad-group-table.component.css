@@ -1,0 +1,9 @@
+.flex-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.small-column {
+    width: 40px;
+}

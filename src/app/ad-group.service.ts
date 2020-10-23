@@ -9,7 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdGroupService {
-  private adGroupUrl = 'api/adgroup';
+  private adGroupUrl = 'api/rows';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
