@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataRow } from './data-row';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Data } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
