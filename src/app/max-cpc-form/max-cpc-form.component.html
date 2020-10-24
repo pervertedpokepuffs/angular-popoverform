@@ -8,8 +8,15 @@
             <input formControlName="maxCpcField" class="form-control" id="max-cpc-field" type="text" />
         </div>
         <div class="flex-buttonpair">
-            <button class="btn btn-primary" (click)="sendClosePopover()">CANCEL</button>
-            <button class="btn btn-primary" type="submit">SAVE</button>
+            <div *ngIf="!spinnerState; else elseBlock">
+                <button class="btn btn-primary" (click)="sendClosePopover()">CANCEL</button>
+                <button class="btn btn-primary" type="submit">SAVE</button>
+            </div>
+            <ng-template #elseBlock>
+                <div class="spinner spinner-border text-primary" role="status">
+                    <div class="sr-only">Loading...</div>
+                </div>
+            </ng-template>
         </div>
     </div>
 </form>

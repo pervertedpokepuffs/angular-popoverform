@@ -23,7 +23,7 @@ import { MaxCpcFormComponent } from './max-cpc-form/max-cpc-form.component';
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 1500 }),
   ],
   providers: [],
   bootstrap: [AppComponent]

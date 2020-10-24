@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AdGroupService } from '../ad-group.service';
 import { DataRow } from '../data-row'
 import { LogService } from '../log.service';
+import { SpinnerService } from '../spinner.service';
 
 interface CpcForm {
   maxCpcField: string
@@ -21,16 +22,17 @@ export class MaxCpcFormComponent implements OnInit {
   maxCpcForm = new FormGroup({
     maxCpcField: new FormControl()
   });
+  spinnerState;
 
   constructor(
     private agService: AdGroupService,
-    private logService: LogService
+    private logService: LogService,
+    private spinnerService: SpinnerService
   ) { }
 
   ngOnInit(): void {
-    this.logService.log('this is cpc form');
-    this.logService.log(this.data);
     this.maxCpcForm.get('maxCpcField').setValue(this.data.maxCpc.toFixed(2));
+    this.initSpinnerSubscription();
   }
 
   sendClosePopover(): void {
@@ -38,13 +40,26 @@ export class MaxCpcFormComponent implements OnInit {
   }
 
   save(input: CpcForm): void {
-    let newData = this.data;
+    let newData = JSON.parse(JSON.stringify(this.data));
     this.logService.log('saving data');
     this.logService.log(input);
     this.logService.log(newData);
     newData.maxCpc = +input.maxCpcField;
     this.logService.log(newData);
-    this.agService.updateRow(this.data);
+    this.spinnerService.toggle();
+    this.agService.updateRow(newData).subscribe(_ => {
+      this.agService.rowChanged.next(true);
+      this.spinnerService.toggle();
+    }
+      , _ => {
+        this.logService.log('failed to update data');
+        this.spinnerService.toggle();
+      });
+  }
+
+  initSpinnerSubscription() {
+    this.spinnerService.spinnerState.subscribe((state:boolean) => this.spinnerState = state);
+    this.logService.log('subscribed to spinner')
   }
 
 }

@@ -19,10 +19,19 @@ export class AdGroupTableComponent implements OnInit {
   ngOnInit(): void {
     this.logService.log('init table');
     this.getRows();
+    this.initGetRowsSubscription();
   }
 
-  getRows(): void {
-    this.agService.getRows().subscribe(apiRows => this.rows = apiRows);
+  async getRows(): Promise<void> {
+    this.rows = await this.agService.getRows();
+  }
+
+  initGetRowsSubscription() {
+    this.agService.rowChanged.subscribe(async (data: boolean) => {
+      if(data) {
+        this.rows = await this.agService.getRows();
+      }
+    });
   }
 
   closePopover(popover) {

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DEMO: angular-popoverform';
+
+  constructor(
+    private http: HttpClient
+  ) { 
+    this.init();
+  }
+
+  init() {
+    this.http.post('command/config', '{"delay":1500}');
+  }
+
 }
