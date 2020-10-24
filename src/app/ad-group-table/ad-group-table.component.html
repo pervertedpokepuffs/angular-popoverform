@@ -22,7 +22,7 @@
                 <div class="flex-cell">
                     MYR{{row.maxCpc.toFixed(2)}}
                     <ng-template #popContent>
-                        <app-max-cpc-form [maxCpc]="row.maxCpc" (closePopover)="p.close()"></app-max-cpc-form>
+                        <app-max-cpc-form [data]="row" (closePopover)="p.close()"></app-max-cpc-form>
                     </ng-template>
                     <span #p="ngbPopover" autoClose="outside" placement="right" [ngbPopover]="popContent" class="oi oi-pencil"></span>
                 </div>

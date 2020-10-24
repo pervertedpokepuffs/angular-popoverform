@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataRow } from './data-row';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AdGroupService {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private logService: LogService
   ) { }
 
   getRows(): Observable<DataRow[]> {
@@ -26,16 +28,24 @@ export class AdGroupService {
     );
   }
 
+  updateRow(data: DataRow): Observable<any> {
+    this.logService.log('updating row');
+    return this.http.put(this.adGroupUrl, data, this.httpOptions).pipe(
+      tap(_ => this.logMessage(`updated row id=${data.id}`),
+      catchError(this.handleError<any>('updateRow')))
+    );
+  }
+
   private handleError<T>(operation: string = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.log(`failed to ${operation}`);
-      console.log(error);
+      this.logService.log(`failed to ${operation}`);
+      this.logService.log(error);
       return of(result as T);
     };
   }
 
   private logMessage(message: string) {
-    console.log(`AdGroupService: ${message}`);
+    this.logService.log(`AdGroupService: ${message}`);
   }
 
 }

@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 import { DataRow } from './data-row';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InMemoryDataService implements InMemoryDbService {
+  constructor(
+    private logService: LogService
+  ) { }
+
   createDb() {
     const rows = [
       {
@@ -33,7 +38,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
     ];
 
-    console.log("in-mem db created.")
+    this.logService.log("in-mem db created.")
 
     return { rows };
   }

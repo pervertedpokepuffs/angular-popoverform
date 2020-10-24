@@ -1,15 +1,15 @@
-<form [formGroup]="maxCpcForm">
+<form [formGroup]="maxCpcForm" (ngSubmit)="save(maxCpcForm.value)">
     <div class="form-group">
         <label for="max-cpc-field">Max. CPC</label>
-        <div class="input-group">
+        <div class="md-form input-group">
             <div class="input-group-prepend">
-                <div class="input-group-text">MYR</div>
+                <span class="input-group-text md-addon">MYR</span>
             </div>
             <input formControlName="maxCpcField" class="form-control" id="max-cpc-field" type="text" />
         </div>
         <div class="flex-buttonpair">
             <button class="btn btn-primary" (click)="sendClosePopover()">CANCEL</button>
-            <button class="btn btn-primary">SAVE</button>
+            <button class="btn btn-primary" type="submit">SAVE</button>
         </div>
     </div>
 </form>
